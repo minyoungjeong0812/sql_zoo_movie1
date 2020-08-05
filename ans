@@ -15,3 +15,16 @@ select movie.id
 from casting join movie on casting.movieid = movie.id
 join actor on actor.id=casting.actorid
 where actor.name = 'Julie Andrews')
+
+3. select actor.name
+from casting join actor on actor.id = casting.actorid
+join movie on casting.movieid=movie.id
+where movie.id in
+
+(select movie.id
+from movie join casting on casting.movieid=movie.id
+join actor on casting.actorid = actor.id
+where actor.name='Art Garfunkel')
+
+and actor.name != 'Art Garfunkel'
+order by actor.name
