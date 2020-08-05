@@ -1,0 +1,17 @@
+1. select movie.title, count(movie.title)
+from movie join casting on movie.id = casting.movieid
+join actor on casting.actorid = actor.id
+where movie.yr=1978
+group by movie.title
+order by count(movie.title) DESC,movie.title
+
+
+2. select movie.title, actor.name
+from movie join casting on movie.id=casting.movieid
+join actor on actor.id=casting.actorid
+where casting.ord=1 and movie.id in
+(
+select movie.id
+from casting join movie on casting.movieid = movie.id
+join actor on actor.id=casting.actorid
+where actor.name = 'Julie Andrews')
